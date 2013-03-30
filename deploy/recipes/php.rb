@@ -14,8 +14,9 @@ node[:deploy].each do |application, deploy|
 
   opsworks_deploy_dir do
     user deploy[:user]
-    group deploy[:group]
+    group "apache"
     path deploy[:deploy_to]
+    mode "0775"
   end
 
   opsworks_deploy do
