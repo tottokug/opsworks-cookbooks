@@ -17,11 +17,13 @@ node[:deploy].each do |application, deploy|
     group "apache"
     path deploy[:deploy_to]
     mode "0775"
+    recursive true
   end
 
   opsworks_deploy do
     deploy_data deploy
     app application
   end
+
 end
 
