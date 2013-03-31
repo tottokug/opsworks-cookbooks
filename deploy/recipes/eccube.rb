@@ -26,22 +26,14 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
-  directory deploy[:deploy_to]+"/current/data" do
-
-    Chef::Log.info("tottokug-Log parmission change #{deploy[:deploy_to]}/current/data")
-    owner "deploy"
-    group "apache"
-    mode "0775"
-    recursive true
+  script "chmod_applicaton" do
+    Chef::Log.info("tottokug-Log permission change ")
+    chmod -R 775 deploy[:depoloy_to]+"current/html"
+    chown -R deploy:apache deploy[:deploy_to] + "current/html"
+    chmod -R 775 deploy[:depoloy_to]+"current/data"
+    chown -R deploy:apache deploy[:deploy_to] + "current/data"
   end
 
-  directory deploy[:deploy_to]+"/current/html" do
-    Chef::Log.info("tottokug-Log parmission change #{deploy[:deploy_to]}/current/html")
-    owner "deploy"
-    group "apache"
-    mode "0775"
-    recursive true
-  end
 
 end
 
