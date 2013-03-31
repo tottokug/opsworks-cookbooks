@@ -32,10 +32,10 @@ node[:deploy].each do |application, deploy|
     cwd deploy[:deploy_to]
     user "root"
     code << -EOH
-       chmod -R 775 current/html
-       chown -R deploy:apache current/html
-       chmod -R 775 current/data
-       chown -R deploy:apache current/data
+    chmod -R 775 current/html
+    chown -R deploy:apache current/html
+    chmod -R 775 current/data
+    chown -R deploy:apache current/data
     EOH
   end
 
