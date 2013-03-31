@@ -14,17 +14,30 @@ node[:deploy].each do |application, deploy|
 
   opsworks_deploy_dir do
     user deploy[:user]
-    group "apache"
+    group deploy[:group] 
     Chef::Log.info("tottokug-Log deploy_to = #{deploy[:deploy_to]}  ")
     path deploy[:deploy_to]
-    mode "0775"
-    recursive true
+    mode "0755"
   end
 
   opsworks_deploy do
     Chef::Log.info("tottokug-Log opsworks_deploy do ")
     deploy_data deploy
     app application
+  end
+
+  directory deploy[:deploy_to]+"/current/data" do
+    owner "deploy"
+    group "apache"
+    mode "0775"
+    recursive true
+  end
+
+  directory deploy[:deploy_to]+"/current/html" do
+    owner "deploy"
+    group "apache"
+    mode "0775"
+    recursive true
   end
 
 end
