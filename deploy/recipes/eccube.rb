@@ -27,6 +27,8 @@ node[:deploy].each do |application, deploy|
   end
 
   directory deploy[:deploy_to]+"/current/data" do
+
+    Chef::Log.info("tottokug-Log parmission change #{depoy[:deploy_to]}/current/data")
     owner "deploy"
     group "apache"
     mode "0775"
@@ -34,6 +36,7 @@ node[:deploy].each do |application, deploy|
   end
 
   directory deploy[:deploy_to]+"/current/html" do
+    Chef::Log.info("tottokug-Log parmission change #{depoy[:deploy_to]}/current/html")
     owner "deploy"
     group "apache"
     mode "0775"
