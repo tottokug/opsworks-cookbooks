@@ -12,16 +12,18 @@ node[:deploy].each do |application, deploy|
     next
   end
 
+  opsworks_deploy do
+    deploy_data deploy
+    app application
+  end
+
   opsworks_deploy_dir do
     user deploy[:user]
     group "apache"
     path deploy[:deploy_to]
     mode "0775"
+    recursive true
   end
 
-  opsworks_deploy do
-    deploy_data deploy
-    app application
-  end
 end
 
