@@ -31,7 +31,7 @@ node[:deploy].each do |application, deploy|
     interpreter "bash"
     cwd deploy[:deploy_to]
     user "root"
-    code << -EOH
+    code <<-EOH
     chmod -R 775 current/html
     chown -R deploy:apache current/html
     chmod -R 775 current/data
