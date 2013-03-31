@@ -28,10 +28,15 @@ node[:deploy].each do |application, deploy|
 
   script "chmod_applicaton" do
     Chef::Log.info("tottokug-Log permission change ")
-    chmod -R 775 #{deploy[:deploy_to]}current/html
-    chown -R deploy:apache #{deploy[:deploy_to]}current/html
-    chmod -R 775 #{deploy[:depoloy_to]}current/data
-    chown -R deploy:apache #{deploy[:deply_to]}current/data
+    interpreter "bash"
+    cwd deploy[:deploy_to]
+    user "root"
+    code << -EOH
+       chmod -R 775 current/html
+       chown -R deploy:apache current/html
+       chmod -R 775 current/data
+       chown -R deploy:apache current/data
+    EOH
   end
 
 
