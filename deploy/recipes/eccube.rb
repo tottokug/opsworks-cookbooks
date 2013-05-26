@@ -15,6 +15,7 @@ node[:deploy].each do |application, deploy|
     cwd deploy[:deploy_to]
     user "root"
     code <<-EOH
+    mkdir -p shared
     chmod -R 775 current/html current/data
     chown -R deploy:apache current/html current/data
     EOH
